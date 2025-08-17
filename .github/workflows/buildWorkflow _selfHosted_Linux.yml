@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       UploadToPackage:
-        description: "Do you need to upload the binary to maven package"
+        description: "Upload to Maven Package"
         required: true
         default: false
         type: boolean
