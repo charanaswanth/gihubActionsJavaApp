@@ -1,4 +1,4 @@
-name: My Java App Workflow
+name: My Java App Workflow (Selfhosted)
 
 on: workflow_dispatch
 
