@@ -1,0 +1,27 @@
+name: My Java App Workflow
+
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout application
+      uses: actions/checkout@v4
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+
+    - name: Build Application
+      run: mvn -clean package
+
+    - name: Archive Artifact
+      uses: actions/upload-artifact@v4.6.2
+      with:
+        name: myJavaApp
+        path: target/*.jar
