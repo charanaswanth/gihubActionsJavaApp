@@ -1,7 +1,13 @@
 name: My Java App Workflow (Selfhosted)
 
-on: workflow_dispatch
-
+on: 
+  workflow_dispatch:
+    inputs:
+      UploadToPackage:
+        description: "Do you need to upload the binary to maven package"
+        required: true
+        default: false
+        type: boolean
 jobs:
   build:
     runs-on: Linux
@@ -21,6 +27,7 @@ jobs:
       run: mvn clean package
 
     - name: Publish to GitHub Packages
+      if: ${{ github.event.inputs.UploadToPackage == true}}
       env:
         USERNAME: 'charanaswanth'
         TOKEN: ${{ secrets.GITHUB_TOKEN }}
