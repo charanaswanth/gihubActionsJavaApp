@@ -19,3 +19,9 @@ jobs:
 
     - name: Build Application
       run: mvn -clean package
+
+    - name: Archive Artifact
+      uses: actions/upload-artifact@v4.6.2
+      with:
+        name: myJavaApp
+        path: target/*.jar
