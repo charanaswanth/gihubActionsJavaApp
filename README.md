@@ -1,1 +1,1 @@
-# gihubActionsJavaApp
+# githubActionsJavaApp

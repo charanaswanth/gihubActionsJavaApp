@@ -18,10 +18,10 @@ jobs:
         cache: maven
 
     - name: Build Application
-      run: mvn -clean package
+      run: mvn clean package
 
-    - name: Archive Artifact
-      uses: actions/upload-artifact@v4.6.2
-      with:
-        name: myJavaApp
-        path: target/*.jar
+    - name: Publish to GitHub Packages
+      env:
+        USERNAME: 'charanaswanth'
+        TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: mvn deploy -s settings.xml

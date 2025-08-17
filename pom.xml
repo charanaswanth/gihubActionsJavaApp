@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.learning.app</groupId>
-    <artifactId>my_application</artifactId>
+    <artifactId>my-java-application</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -22,6 +22,15 @@
         <scope>test</scope>
     </dependency>
     </dependencies>
+
+    <distributionManagement>
+    <repository>
+        <id>github</id>
+        <name>Github Package Repository</name>
+        <url>https://maven.pkg.github.com/charanaswanth/githubActionsJavaApp</url>
+    </repository>
+    </distributionManagement>
+
 
     <build>
         <plugins>
