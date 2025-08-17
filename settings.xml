@@ -17,7 +17,7 @@
         </repository>
         <repository>
           <id>github</id>
-          <url>https://maven.pkg.github.com/charanaswanth/gihubActionsJavaApp</url>
+          <url>https://maven.pkg.github.com/charanaswanth/githubActionsJavaApp</url>
           <snapshots>
             <enabled>true</enabled>
           </snapshots>

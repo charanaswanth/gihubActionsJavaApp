@@ -27,7 +27,7 @@
     <repository>
         <id>github</id>
         <name>Github Package Repository</name>
-        <url>https://maven.pkg.github.com/charanaswanth/gihubActionsJavaApp</url>
+        <url>https://maven.pkg.github.com/charanaswanth/githubActionsJavaApp</url>
     </repository>
     </distributionManagement>
 
