@@ -2,7 +2,7 @@ FROM eclipse-temurin:17-jdk-alpine
 
 RUN mkdir application
 
-COPY target/my-java-application-1.0-SNAPSHOT.jar application/app.jar
+COPY my-java-application-1.0-SNAPSHOT.jar application/app.jar
 
 WORKDIR /application
 
