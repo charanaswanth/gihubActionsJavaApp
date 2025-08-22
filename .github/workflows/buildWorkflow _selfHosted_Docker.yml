@@ -27,4 +27,4 @@ jobs:
       run: mvn clean package
 
     - name: Docker Build
-      uses:
+      run: docker build -t myapp:latest .
