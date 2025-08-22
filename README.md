@@ -10,3 +10,5 @@
     -> ./config.sh --url https://github.com/charanaswanth/githubActionsJavaApp --token <<token>>
     -> Add runner group, name and labels
     -> ./run.sh
+
+2. ghcr.io/<OWNER>/<REPO>:<TAG>
