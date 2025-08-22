@@ -51,12 +51,15 @@ jobs:
 
     - name: Build Docker image
       run:
-        docker build -t ghcr.io/${{ github.repository_owner }}/myjavapp:latest .
+        docker build -t ghcr.io/${{ github.repository_owner }}/myjavapp:${{ github.run_number }} .
 
     - name: Aqua Security Trivy
       uses: aquasecurity/trivy-action@0.32.0
+      with:
+        # image reference (for backward compatibility)
+        image-ref: ghcr.io/${{ github.repository_owner }}/myjavapp:${{ github.run_number }}
               
 
     #- name: Push Docker image
     #  run:
-    #      docker push ghcr.io/${{ github.repository_owner }}/myjavapp:latest
+    #      docker push ghcr.io/${{ github.repository_owner }}/myjavapp:${{ github.run_number }}
