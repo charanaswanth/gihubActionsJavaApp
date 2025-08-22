@@ -1,13 +1,7 @@
 name: My Java App Workflow (Docker)
 
 on: 
-  workflow_dispatch:
-    inputs:
-      UploadToPackage:
-        description: "Upload to Maven Package"
-        required: true
-        default: false
-        type: boolean
+  workflow_dispatch
 jobs:
   build:
     runs-on: Linux
@@ -26,5 +20,17 @@ jobs:
     - name: Build Application
       run: mvn clean package
 
-    - name: Docker Build
-      run: docker build -t myapp:latest .
+    - name: Github registry login
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: 'charanaswanth'
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Build Docker image
+      run:
+        docker build -t ghcr.io/${{ github.repository }}/myjavapp:latest .
+
+    - name: Push Docker image
+      run:
+          docker push ghcr.io/${{ github.repository }}/myjavapp:latest
