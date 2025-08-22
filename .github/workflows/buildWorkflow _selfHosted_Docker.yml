@@ -25,9 +25,19 @@ jobs:
 
     - name: Build Application
       run: mvn clean package
+    
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v4.6.2
+      with:
+        name: my-java-application-1.0-SNAPSHOT.jar
+        path: target
 
+  docker:
+    runs-on: Linux
+    if: ${{ github.event.inputs.UploadToRegistry == 'true' }}
+    steps:
     - name: Github registry login
-      if: ${{ github.event.inputs.UploadToRegistry == 'true' }}
+      
       uses: docker/login-action@v3
       with:
         registry: ghcr.io
@@ -35,11 +45,9 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Build Docker image
-      if: ${{ github.event.inputs.UploadToRegistry == 'true' }}
       run:
         docker build -t ghcr.io/${{ github.repository_owner }}/myjavapp:latest .
 
-    - name: Push Docker image
-      if: ${{ github.event.inputs.UploadToRegistry == 'true' }}
-      run:
-          docker push ghcr.io/${{ github.repository_owner }}/myjavapp:latest
+    #- name: Push Docker image
+    #  run:
+    #      docker push ghcr.io/${{ github.repository_owner }}/myjavapp:latest
