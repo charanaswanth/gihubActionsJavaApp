@@ -1,4 +1,4 @@
-name: My Java App Workflow (Docker)
+name: My Java App Workflow with Windows (Docker)
 
 on: 
   workflow_dispatch:
