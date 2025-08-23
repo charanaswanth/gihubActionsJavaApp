@@ -10,7 +10,7 @@ on:
         type: boolean
 jobs:
   build:
-    runs-on: Windows
+    runs-on: windows-latest
 
     steps:
     - name: Checkout application
