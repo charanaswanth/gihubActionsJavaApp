@@ -24,7 +24,7 @@ jobs:
         cache: maven
 
     - name: Build Application
-      run: mvn clean package -Dskip.test
+      run: mvn clean package -Dmaven.test.skip
 
     - name: Publish to GitHub Packages
       if: ${{ github.event.inputs.UploadToPackage == 'true' }}
