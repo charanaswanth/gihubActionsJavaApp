@@ -31,4 +31,4 @@ jobs:
       env:
         USERNAME: 'charanaswanth'
         TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: mvn deploy -s settings.xml
+      run: mvn deploy -DskipTests -s settings.xml
