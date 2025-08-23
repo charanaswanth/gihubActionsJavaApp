@@ -21,6 +21,6 @@ class ApplicationTest {
         System.setOut(originalOut);
 
         // Assert
-        assertEquals("My Java Application!\n", outContent.toString());
+        assertEquals("My Java Application!", outContent.toString());
     }
 }
