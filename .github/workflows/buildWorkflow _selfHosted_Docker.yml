@@ -34,6 +34,7 @@ jobs:
 
   docker:
     runs-on: Linux
+    needs: build 
     if: ${{ github.event.inputs.UploadToRegistry == 'true' }}
     steps:
     - name: Download a Build Artifact
