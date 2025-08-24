@@ -41,23 +41,17 @@ jobs:
       with:
         name: my-java-application-1.0-SNAPSHOT.jar
 
-    - name: Github registry login
-      
-      uses: docker/login-action@v3
+    - name: 'Login via Azure CLI'
+      uses: azure/login@v1
       with:
-        registry: ghcr.io
-        username: 'charanaswanth'
-        password: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Build Docker image
-      run:
-        docker build -t ghcr.io/${{ github.repository_owner }}/myjavapp:${{ github.run_number }} .
-
-    - name: Aqua Security Trivy
-      uses: aquasecurity/trivy-action@0.32.0
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        
+    - name: 'Build and push image'
+      uses: azure/docker-login@v1
       with:
-        image-ref: ghcr.io/${{ github.repository_owner }}/myjavapp:${{ github.run_number }}              
-
-    - name: Push Docker image
-      run:
-          docker push ghcr.io/${{ github.repository_owner }}/myjavapp:${{ github.run_number }}
+        login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+    - run: |
+            docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/myjavapp:${{ github.run_number }}
+            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/myjavapp:${{ github.run_number }}
