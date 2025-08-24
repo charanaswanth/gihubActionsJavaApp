@@ -1,0 +1,57 @@
+name: My Java App Workflow (ACR)
+
+on: 
+  workflow_dispatch:
+    inputs:
+      UploadToRegistry:
+        description: "Upload to Registry"
+        required: true
+        default: false
+        type: boolean
+jobs:
+  build:
+    runs-on: Linux
+
+    steps:
+    - name: Checkout application
+      uses: actions/checkout@v4
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+
+    - name: Build Application
+      run: mvn clean package
+    
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v4.6.2
+      with:
+        name: my-java-application-1.0-SNAPSHOT.jar
+        path: target
+
+  docker:
+    runs-on: Linux
+    if: ${{ github.event.inputs.UploadToRegistry == 'true' }}
+    steps:
+    - name: Download a Build Artifact
+      uses: actions/download-artifact@v5.0.0
+      with:
+        name: my-java-application-1.0-SNAPSHOT.jar
+
+    - name: 'Login via Azure CLI'
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        
+    - name: 'Build and push image'
+      uses: azure/docker-login@v1
+      with:
+        login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+    - run: |
+            docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/myjavapp:${{ github.run_number }}
+            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/myjavapp:${{ github.run_number }}
