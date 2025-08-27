@@ -33,15 +33,9 @@ jobs:
         PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
       run: mvn deploy -s settingsNexus
 
-    - name: Nexus Repo Publish
-      uses: sonatype-nexus-community/nexus-repo-github-action@master
+    - name: Publish to Nexus
       if: ${{ github.event.inputs.UploadToPackage == 'true' }}
-      with:
-        serverUrl: http://localhost:8081
+      env:
         username: ${{ secrets.NEXUS_USERNAME }}
         password: ${{ secrets.NEXUS_PASSWORD }}
-        format: maven2
-        repository: maven-releases
-        coordinates: groupId=com.learning.app artifactId=my-java-application version=1.0-SNAPSHOT
-        assets: extension=jar
-        filename: target/my-java-application-1.0-SNAPSHOTjar
+      run: mvn deploy -s settingsNexus.xml
