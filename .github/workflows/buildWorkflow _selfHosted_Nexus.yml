@@ -1,4 +1,4 @@
-name: My Java App Workflow (Selfhosted)
+name: My Java App Workflow (Selfhosted-Nexus)
 
 on: 
   workflow_dispatch:
@@ -26,9 +26,9 @@ jobs:
     - name: Build Application
       run: mvn clean package
 
-    - name: Publish to GitHub Packages
+    - name: Publish to Nexus
       if: ${{ github.event.inputs.UploadToPackage == 'true' }}
       env:
-        USERNAME: ${{ secrets.NEXUS_USER }}
-        PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
-      run: mvn deploy -s settingsNexus
+        username: ${{ secrets.NEXUS_USERNAME }}
+        password: ${{ secrets.NEXUS_PASSWORD }}
+      run: mvn deploy -s settingsNexus.xml
