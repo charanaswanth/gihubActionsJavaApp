@@ -26,13 +26,6 @@ jobs:
     - name: Build Application
       run: mvn clean package
 
-    - name: Publish to GitHub Packages
-      if: ${{ github.event.inputs.UploadToPackage == 'true' }}
-      env:
-        USERNAME: ${{ secrets.NEXUS_USERNAME }}
-        PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
-      run: mvn deploy -s settingsNexus
-
     - name: Publish to Nexus
       if: ${{ github.event.inputs.UploadToPackage == 'true' }}
       env:
