@@ -6,7 +6,7 @@
 
     <groupId>com.learning.app</groupId>
     <artifactId>my-java-application</artifactId>
-    <version>1.0</version>
+    <version>1.0-SNAPSHOT</version>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -25,15 +25,10 @@
 
     <distributionManagement>
     <repository>
-      <id>nexus-releases</id>
-      <name>Nexus Release Repository</name>
-      <url>http://localhost:8081/repository/maven-releases/</url>
+        <id>github</id>
+        <name>Github Package Repository</name>
+        <url>https://maven.pkg.github.com/charanaswanth/githubActionsJavaApp</url>
     </repository>
-    <snapshotRepository>
-      <id>nexus-snapshots</id>
-      <name>Nexus Snapshot Repository</name>
-      <url>http://localhost:8081/repository/maven-snapshots/</url>
-    </snapshotRepository>
     </distributionManagement>
 
 
