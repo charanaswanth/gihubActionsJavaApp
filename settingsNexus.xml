@@ -34,7 +34,6 @@
   </profiles>
 
   <servers>
-    <servers>
     <server>
       <id>nexus-releases</id>
       <username>${username}</username>
