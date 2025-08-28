@@ -1,0 +1,36 @@
+name: My Java App Workflow (Downstream)
+
+on: 
+  workflow_run:
+    workflows: [My Java App Workflow (Upstream)]
+    types: [completed]
+
+jobs:
+  docker:
+    runs-on: Linux
+    steps:
+    - name: Download a Build Artifact
+      uses: actions/download-artifact@v5.0.0
+      with:
+        name: my-java-application-1.0-SNAPSHOT.jar
+
+    - name: Github registry login
+      
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: 'charanaswanth'
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Build Docker image
+      run:
+        docker build -t ghcr.io/${{ github.repository_owner }}/myjavapp:${{ github.run_number }} .
+
+    - name: Aqua Security Trivy
+      uses: aquasecurity/trivy-action@0.32.0
+      with:
+        image-ref: ghcr.io/${{ github.repository_owner }}/myjavapp:${{ github.run_number }}
+
+    # - name: Push Docker image
+    #   run:
+    #       docker push ghcr.io/${{ github.repository_owner }}/myjavapp:${{ github.run_number }}
