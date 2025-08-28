@@ -13,7 +13,7 @@ jobs:
       uses: actions/download-artifact@v5.0.0
       with:
         name: my-java-application-1.0-SNAPSHOT.jar
-        run_id: 17291216801
+        run-id: 17291216801
         
     - name: Github registry login
       
