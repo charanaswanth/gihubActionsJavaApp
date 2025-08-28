@@ -4,6 +4,7 @@ on:
   workflow_run:
     workflows: [My Java App Workflow (Upstream)]
     types: [completed]
+    branches-ignore: []
 
 jobs:
   docker:
