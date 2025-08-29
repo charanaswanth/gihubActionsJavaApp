@@ -10,7 +10,7 @@ on:
         type: boolean
 jobs:
   build:
-    runs-on: Linux
+    runs-on: ubutnu-latest
 
     steps:
     - name: Checkout application
