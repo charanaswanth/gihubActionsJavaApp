@@ -9,6 +9,9 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
+    - name: Checkout application
+      uses: actions/checkout@v4
+
     - name: Download a Build Artifact
       uses: actions/download-artifact@v5.0.0
       with:
