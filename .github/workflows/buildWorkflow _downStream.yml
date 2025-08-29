@@ -7,7 +7,7 @@ on:
 
 jobs:
   docker:
-    runs-on: Linux
+    runs-on: ubuntu-latest
     steps:
     - name: Download a Build Artifact
       uses: actions/download-artifact@v5.0.0
