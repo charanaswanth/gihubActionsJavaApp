@@ -26,12 +26,12 @@ jobs:
     - name: Build Application
       run: mvn clean package
 
-    # - name: Publish to GitHub Packages
-    #   if: ${{ github.event.inputs.UploadToPackage == 'true' }}
-    #   env:
-    #     USERNAME: 'charanaswanth'
-    #     TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    #   run: mvn deploy -s settings.xml
+    - name: Publish to GitHub Packages
+      if: ${{ github.event.inputs.UploadToPackage == 'true' }}
+      env:
+        USERNAME: 'charanaswanth'
+        TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: mvn deploy -s settings.xml
     
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v4.6.2
